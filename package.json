@@ -1,0 +1,56 @@
+{
+    "name": "elite-blackjack-casino",
+    "version": "2.3.0",
+    "description": "A sophisticated casino game featuring unlimited betting slots, professional blackjack, 40-level VIP progression, 9 immersive themes, and comprehensive gambling mechanics with psychological manipulation systems",
+    "main": "index.html",
+    "scripts": {
+        "start": "python -m http.server 8000",
+        "serve": "python3 -m http.server 8000"
+    },
+    "keywords": [
+        "blackjack",
+        "casino",
+        "game",
+        "javascript",
+        "html5",
+        "vip",
+        "cards",
+        "gambling",
+        "slots",
+        "themes",
+        "psychology",
+        "manipulation",
+        "dealer",
+        "split",
+        "surrender",
+        "progressive",
+        "jackpot",
+        "loan-shark",
+        "tavern",
+        "vegas",
+        "monte-carlo",
+        "royal",
+        "holographic",
+        "legendary",
+        "apex",
+        "unlimited-betting"
+    ],
+    "author": "Elite Blackjack Casino",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yourusername/elite-blackjack-casino.git"
+    },
+    "homepage": "https://yourusername.github.io/elite-blackjack-casino",
+    "bugs": {
+        "url": "https://github.com/yourusername/elite-blackjack-casino/issues"
+    },
+    "engines": {
+        "node": ">=12.0.0"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead"
+    ]
+}

@@ -1,0 +1,34 @@
+# Development files
+*.log
+*.tmp
+*.temp
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node modules (if any)
+node_modules/
+npm-debug.log*
+
+# Backup files
+*_backup.*
+*.bak
+
+# Development specs and Kiro files
+.kiro/
+
+# Cache files
+*.cache

@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Blackjack</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="game-container">
+        <header>
+            <h1>♠️ Elite Blackjack ♦️</h1>
+            <div class="balance">Balance: $<span id="balance">500</span></div>
+            <div class="vip-status">
+                <span id="vip-level">VIP Bronze (Level 1)</span>
+                <div id="vip-progress" class="vip-progress">Next: $2,000 balance</div>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button id="game-tab" class="tab-btn active">🎰 Game</button>
+            <button id="shop-tab" class="tab-btn">🛒 Shop</button>
+            <button id="bank-tab" class="tab-btn">🏦 Bank</button>
+            <button id="slots-tab" class="tab-btn">🎲 Slots</button>
+            <button id="roulette-tab" class="tab-btn">🎯 Roulette</button>
+            <button id="themes-tab" class="tab-btn">🎨 Themes</button>
+            <button id="dev-tab" class="tab-btn" style="display: none;">⚙️ Dev</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Game Tab -->
+            <div id="game-content" class="tab-panel active">
+                <div class="dealer-comment-section">
+                    <div id="dealer-comment" class="dealer-comment"></div>
+                </div>
+
+                <div class="betting-section">
+                    <div class="bet-controls">
+                        <label for="bet-amount">Bet Amount:</label>
+                        <input type="number" id="bet-amount" min="10" value="50" step="10">
+                        <div class="bet-limit">Max: $<span id="bet-limit">1,000</span></div>
+                        <button id="deal-btn" class="btn primary">Deal Cards</button>
+                    </div>
+                    <div class="tip-section">
+                        <button id="tip-btn" class="btn tip-btn">💰 Tip Dealer ($50)</button>
+                        <div id="tip-status" class="tip-status">No active tips</div>
+                    </div>
+
+                    <!-- Enhanced Psychological Manipulation Section -->
+                    <div class="psych-section">
+                        <div class="game-stats-row">
+                            <div class="streak-info">
+                                <div id="streak-counter" class="streak-counter">🔥 Current Streak: 0</div>
+                                <div id="table-temperature" class="table-temperature">🌡️ Table: Neutral</div>
+                            </div>
+                            <div class="session-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Games Played:</span>
+                                    <span class="stat-value" id="games-played">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Win Rate:</span>
+                                    <span class="stat-value" id="win-rate">0%</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Games Won:</span>
+                                    <span class="stat-value" id="games-won">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Games Lost:</span>
+                                    <span class="stat-value" id="games-lost">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="casino-atmosphere">
+                            <div class="dealer-mood">
+                                <div class="mood-indicator">
+                                    <span class="mood-emoji">😐</span>
+                                    <span class="mood-text">Dealer is feeling neutral</span>
+                                </div>
+                            </div>
+                            <div class="table-activity">
+                                <div class="activity-indicator">
+                                    <span class="activity-dots">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </span>
+                                    <span class="activity-text">Table Activity: Moderate</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="near-miss" class="near-miss"></div>
+
+                        <!-- Enhanced Fake Spectators Section -->
+                        <div class="spectators-area">
+                            <div class="spectators-header">
+                                <span class="spectators-icon">👥</span>
+                                <span class="spectators-title">Other Players</span>
+                                <span class="spectators-count" id="spectators-count">3 watching</span>
+                            </div>
+                            <div id="spectator-comments" class="spectator-comments">
+                                <div class="spectator-comment">
+                                    <span class="spectator-name">HighRoller23:</span>
+                                    <span class="comment-text">"This table is heating up!"</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Enhanced Subliminal Message Flash -->
+                        <div id="subliminal-flash" class="subliminal-flash">KEEP PLAYING</div>
+
+                        <!-- Lucky Charm Display -->
+                        <div class="lucky-charms" id="lucky-charms">
+                            <div class="charm-item active">
+                                <span class="charm-icon">🍀</span>
+                                <span class="charm-name">Lucky Clover</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="chips-display" class="chips-display"></div>
+                </div>
+
+                <div class="game-area">
+                    <div class="dealer-section">
+                        <h3>🎩 Dealer <span id="dealer-score" class="score"></span></h3>
+                        <div id="dealer-cards" class="cards"></div>
+                    </div>
+
+                    <div class="table-center">
+                        <div class="deck-container">
+                            <div id="deck" class="deck">
+                                <div class="deck-stack"></div>
+                                <div class="deck-stack"></div>
+                                <div class="deck-stack"></div>
+                                <div class="deck-stack"></div>
+                                <div class="deck-stack"></div>
+                            </div>
+                            <div class="deck-label">Deck</div>
+                        </div>
+                        <div class="discard-pile">
+                            <div id="discard" class="discard-container"></div>
+                            <div class="discard-label">Discard</div>
+                        </div>
+                    </div>
+
+                    <div class="player-section">
+                        <h3>🎯 Player <span id="player-score" class="score"></span></h3>
+                        <div id="player-cards" class="cards"></div>
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button id="hit-btn" class="btn" disabled>Hit</button>
+                    <button id="stand-btn" class="btn" disabled>Stand</button>
+                    <button id="double-btn" class="btn" disabled>Double Down</button>
+                    <button id="split-btn" class="btn" disabled>Split</button>
+                    <button id="surrender-btn" class="btn" disabled>Surrender</button>
+                </div>
+
+                <div id="game-message" class="message"></div>
+            </div>
+
+            <!-- Shop Tab -->
+            <div id="shop-content" class="tab-panel">
+                <div class="shop-header">
+                    <h2>🍺 The Tavern's Back Room</h2>
+                    <p class="shop-subtitle">"Psst... got some special items that might help your luck, friend..."</p>
+                </div>
+
+                <div class="shop-grid">
+                    <!-- Lucky Charms Section -->
+                    <div class="shop-section">
+                        <h3>🍀 Lucky Charms</h3>
+                        <div class="shop-items">
+                            <div class="shop-item" data-tooltip="Increases luck by 15% for next 3 hands">
+                                <div class="item-icon">🐰</div>
+                                <div class="item-info">
+                                    <h4>Rabbit's Foot</h4>
+                                    <p>From a very lucky rabbit... or so they say</p>
+                                    <div class="item-price">$50</div>
+                                </div>
+                                <button id="shop-charm-btn" class="shop-buy-btn">Buy</button>
+                            </div>
+
+                            <div class="shop-item" data-tooltip="Boosts winning chances by 20% for next 2 hands">
+                                <div class="item-icon">🍀</div>
+                                <div class="item-info">
+                                    <h4>Four-Leaf Clover</h4>
+                                    <p>Pressed between pages of an old gambling book</p>
+                                    <div class="item-price">$100</div>
+                                </div>
+                                <button id="shop-clover-btn" class="shop-buy-btn">Buy</button>
+                            </div>
+
+                            <div class="shop-item" data-tooltip="Protects against bad luck streaks">
+                                <div class="item-icon">🧿</div>
+                                <div class="item-info">
+                                    <h4>Evil Eye Protection</h4>
+                                    <p>Wards off bad luck... and jealous players</p>
+                                    <div class="item-price">$75</div>
+                                </div>
+                                <button id="shop-eye-btn" class="shop-buy-btn">Buy</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Reading Section -->
+                    <div class="shop-section">
+                        <h3>🔮 Mystical Services</h3>
+                        <div class="shop-items">
+                            <div class="shop-item" data-tooltip="Reveals the next 5 cards in the deck">
+                                <div class="item-icon">🔮</div>
+                                <div class="item-info">
+                                    <h4>Fortune Reading</h4>
+                                    <p>Predict your next 5 hands!</p>
+                                    <div class="item-price">$25</div>
+                                </div>
+                                <button id="shop-fortune-btn" class="shop-buy-btn">Buy</button>
+                            </div>
+
+                            <div class="shop-item" data-tooltip="Improves card quality for next 4 hands">
+                                <div class="item-icon">🎴</div>
+                                <div class="item-info">
+                                    <h4>Card Blessing</h4>
+                                    <p>Blessed cards for better draws!</p>
+                                    <div class="item-price">$40</div>
+                                </div>
+                                <button id="shop-blessing-btn" class="shop-buy-btn">Buy</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VIP Boosts Section -->
+                    <div class="shop-section">
+                        <h3>⭐ VIP Boosts</h3>
+                        <div class="shop-items">
+                            <div class="shop-item legendary"
+                                data-tooltip="Instantly activates hot table - guaranteed wins!">
+                                <div class="item-icon">⚡</div>
+                                <div class="item-info">
+                                    <h4>Hot Streak Activator</h4>
+                                    <p>Instantly heat up the table!</p>
+                                    <div class="item-price">$60</div>
+                                </div>
+                                <button id="shop-hotstreak-btn" class="shop-buy-btn">Buy</button>
+                            </div>
+
+                            <div class="shop-item rare" data-tooltip="Breaks any losing streak immediately">
+                                <div class="item-icon">🎯</div>
+                                <div class="item-info">
+                                    <h4>Streak Breaker</h4>
+                                    <p>End your losing streak now!</p>
+                                    <div class="item-price">$80</div>
+                                </div>
+                                <button id="shop-breaker-btn" class="shop-buy-btn">Buy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="shop-inventory">
+                    <h3>📦 Your Items</h3>
+                    <div id="inventory-list" class="inventory-grid">
+                        <div class="inventory-empty">No items purchased yet</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bank Tab -->
+            <div id="bank-content" class="tab-panel">
+                <div class="bank-header">
+                    <h2>🏦 Vinny's Financial Services</h2>
+                    <p class="bank-subtitle">"When you're down on your luck, we're here to help... for a price."</p>
+                    <div class="bank-credentials">
+                        <span class="credential">📜 Licensed Lender</span>
+                        <span class="credential">⚖️ Fully Regulated</span>
+                        <span class="credential">🔒 Secure Transactions</span>
+                    </div>
+                </div>
+
+                <div class="bank-main">
+                    <div class="loan-section">
+                        <div class="loan-info-card">
+                            <h3>💰 Quick Cash Loans</h3>
+                            <div class="loan-details">
+                                <div class="loan-amount">$2,000 Available</div>
+                                <div class="loan-terms">
+                                    <div class="term-item">📈 Interest Rate: 25% compound per game</div>
+                                    <div class="term-item">🎰 Games Include: Blackjack hands AND slot spins</div>
+                                    <div class="term-item">⏰ Repayment Period: 8 games maximum</div>
+                                    <div class="term-item">💸 Starting Debt: $2,500 (grows exponentially)</div>
+                                    <div class="term-item">⚠️ Late Payment: Permanent account lockdown</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="loan-status-card">
+                            <h3>📊 Loan Status</h3>
+                            <div id="loan-status" class="loan-status">No active loans</div>
+                            <div id="loan-progress" class="loan-progress"></div>
+                        </div>
+
+                        <div class="loan-actions">
+                            <button id="loan-btn" class="btn loan-btn">💰 Take Loan ($2,000)</button>
+                            <button id="repay-btn" class="btn repay-btn" disabled>💸 Repay Loan</button>
+                        </div>
+                    </div>
+
+                    <div class="bank-warning">
+                        <h3>⚠️ Important Notice</h3>
+                        <div class="warning-text">
+                            <p>Vinny's Financial Services is a <strong>legitimate business operation</strong>. All loans
+                                are subject to our standard terms and conditions.</p>
+                            <p><strong>IMPORTANT:</strong> Interest compounds at 25% per game (blackjack hands AND slot
+                                spins).
+                                Your debt will grow rapidly: $2,500 → $3,125 → $3,906 → $4,883 → $6,104 → $7,630 →
+                                $9,537 → $11,921!</p>
+                            <p>Failure to repay within the specified timeframe will result in... <em>permanent
+                                    collection activities</em>.</p>
+                            <p class="fine-print">By accepting a loan, you acknowledge that you understand the
+                                exponential growth of compound interest.</p>
+                            <p class="disclaimer">⚠️ <strong>DISCLAIMER:</strong> Collection activities include
+                                immediate and permanent account lockdown with no appeal process.</p>
+                        </div>
+                    </div>
+
+                    <div class="testimonials">
+                        <h3>💬 Customer Reviews</h3>
+                        <div class="testimonial">
+                            <div class="testimonial-text">"Vinny helped me when I was desperate. I paid back every
+                                penny... eventually. The interest was fair, considering my situation."</div>
+                            <div class="testimonial-author">- Former Customer</div>
+                        </div>
+                        <div class="testimonial">
+                            <div class="testimonial-text">"Quick approval, reasonable terms. Just make sure you pay on
+                                time. I've seen what happens to those who don't."</div>
+                            <div class="testimonial-author">- Anonymous</div>
+                        </div>
+                        <div class="testimonial">
+                            <div class="testimonial-text">"I can't recommend them enough. In fact, I'm not allowed to
+                                say anything negative. Five stars, would borrow again!"</div>
+                            <div class="testimonial-author">- Satisfied Customer</div>
+                        </div>
+                        <div class="testimonial">
+                            <div class="testimonial-text">"Professional service, discrete collection methods. My family
+                                never even knew I was in debt until... well, never mind that."</div>
+                            <div class="testimonial-author">- Repeat Client</div>
+                        </div>
+                        <div class="testimonial">
+                            <div class="testimonial-text">"They really care about their customers. Vinny personally
+                                visited me at home to discuss repayment options. Very hands-on approach."</div>
+                            <div class="testimonial-author">- Grateful Borrower</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slots Tab -->
+            <div id="slots-content" class="tab-panel">
+                <div class="slots-header">
+                    <h2>🎰 Lucky Sevens Slots</h2>
+                    <p class="slots-subtitle">"Classic 3-reel slot machine with real payouts"</p>
+                </div>
+
+                <div class="progressive-jackpot">
+                    <div class="jackpot-display">
+                        <h3>💰 PROGRESSIVE JACKPOT 💰</h3>
+                        <div id="jackpot-amount" class="jackpot-amount">$999,999</div>
+                        <div class="jackpot-subtitle">Someone's about to get VERY lucky!</div>
+                    </div>
+                </div>
+
+                <!-- Classic Slot Machine -->
+                <div class="classic-slot-machine">
+                    <div class="slot-machine-frame">
+                        <!-- Machine Header -->
+                        <div class="machine-header">
+                            <div class="machine-title">LUCKY SEVENS</div>
+                            <div class="machine-lights">
+                                <div class="light"></div>
+                                <div class="light"></div>
+                                <div class="light"></div>
+                            </div>
+                        </div>
+
+                        <!-- Top Decorative Panel -->
+                        <div class="top-panel">
+                            <div class="casino-logo">🎰 CASINO ROYALE 🎰</div>
+                            <div class="decorative-lights">
+                                <div class="deco-light"></div>
+                                <div class="deco-light"></div>
+                                <div class="deco-light"></div>
+                                <div class="deco-light"></div>
+                                <div class="deco-light"></div>
+                            </div>
+                        </div>
+
+                        <!-- Side Decorations -->
+                        <div class="left-decoration">
+                            <div class="side-panel">
+                                <div class="side-light"></div>
+                                <div class="side-ornament">♠️</div>
+                                <div class="side-light"></div>
+                                <div class="side-ornament">♦️</div>
+                                <div class="side-light"></div>
+                            </div>
+                        </div>
+
+                        <div class="right-decoration">
+                            <div class="side-panel">
+                                <div class="side-light"></div>
+                                <div class="side-ornament">♥️</div>
+                                <div class="side-light"></div>
+                                <div class="side-ornament">♣️</div>
+                                <div class="side-light"></div>
+                            </div>
+                        </div>
+
+                        <!-- Reel Display Area -->
+                        <div class="slot-display"
+                            style="display: flex !important; flex-direction: row !important; justify-content: center !important; align-items: flex-start !important; gap: 12px !important;">
+                            <!-- Reel 1 -->
+                            <div class="slot-reel-container"
+                                style="width: 90px !important; height: 240px !important; flex-shrink: 0 !important;">
+                                <div class="reel-label">REEL 1</div>
+                                <div class="slot-reel" id="reel1">
+                                    <div class="symbol-stack">
+                                        <div class="slot-symbol above">7️⃣</div>
+                                        <div class="slot-symbol center">🍒</div>
+                                        <div class="slot-symbol below">🔔</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Reel 2 -->
+                            <div class="slot-reel-container"
+                                style="width: 90px !important; height: 240px !important; flex-shrink: 0 !important;">
+                                <div class="reel-label">REEL 2</div>
+                                <div class="slot-reel" id="reel2">
+                                    <div class="symbol-stack">
+                                        <div class="slot-symbol above">⭐</div>
+                                        <div class="slot-symbol center">🍒</div>
+                                        <div class="slot-symbol below">🍋</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Reel 3 -->
+                            <div class="slot-reel-container"
+                                style="width: 90px !important; height: 240px !important; flex-shrink: 0 !important;">
+                                <div class="reel-label">REEL 3</div>
+                                <div class="slot-reel" id="reel3">
+                                    <div class="symbol-stack">
+                                        <div class="slot-symbol above">💎</div>
+                                        <div class="slot-symbol center">🍒</div>
+                                        <div class="slot-symbol below">7️⃣</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payline Indicator -->
+                        <div class="payline-container">
+                            <div class="payline-label">PAYLINE</div>
+                            <div class="payline active"></div>
+                        </div>
+
+                        <!-- Win Display Area -->
+                        <div class="win-display-area">
+                            <div class="win-label">WIN PAID</div>
+                            <div class="win-amount" id="slot-win-display">$0</div>
+                            <div class="win-decoration">
+                                <span class="win-star">⭐</span>
+                                <span class="win-star">⭐</span>
+                                <span class="win-star">⭐</span>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Decorative Panel -->
+                        <div class="bottom-panel">
+                            <div class="coin-slot">💰 INSERT COINS 💰</div>
+                            <div class="bottom-lights">
+                                <div class="bottom-light"></div>
+                                <div class="bottom-light"></div>
+                                <div class="bottom-light"></div>
+                            </div>
+                        </div>
+
+                        <!-- Slot Controls -->
+                        <div class="slot-controls">
+                            <div class="bet-section">
+                                <label for="slot-bet">Bet Amount:</label>
+                                <div class="bet-input-container">
+                                    <select id="slot-bet">
+                                        <option value="10">$10</option>
+                                        <option value="25">$25</option>
+                                        <option value="50" selected>$50</option>
+                                        <option value="100">$100</option>
+                                        <option value="250">$250</option>
+                                        <option value="500">$500</option>
+                                        <option value="1000">$1,000</option>
+                                        <option value="2500">$2,500</option>
+                                        <option value="5000">$5,000</option>
+                                        <option value="10000">$10,000</option>
+                                        <option value="25000">$25,000</option>
+                                        <option value="50000">$50,000</option>
+                                        <option value="100000">$100,000</option>
+                                        <option value="250000">$250,000</option>
+                                        <option value="500000">$500,000</option>
+                                        <option value="1000000">$1,000,000</option>
+                                        <option value="custom">Custom Amount</option>
+                                    </select>
+                                    <div class="custom-bet-container" id="custom-bet-container" style="display: none;">
+                                        <input type="number" id="custom-bet-input" placeholder="Enter amount" min="10"
+                                            step="1">
+                                        <button id="apply-custom-bet" class="btn custom-bet-btn">Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button id="spin-btn" class="btn spin-btn">🎰 SPIN 🎰</button>
+                            <button id="max-bet-btn" class="btn max-bet-btn">MAX BET</button>
+                        </div>
+
+                        <!-- Slot Info -->
+                        <div class="slot-info">
+                            <div class="slot-info-row">
+                                <div class="last-win">Last Win: $<span id="last-win-amount">0</span></div>
+                                <div class="total-spins">Total Spins: <span id="total-spins">0</span></div>
+                            </div>
+                            <div class="loan-warning-slots">⚠️ Each spin counts as a "game" for loan repayment!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paytable -->
+                <div class="paytable-section">
+                    <h3>💰 Paytable</h3>
+                    <p style="text-align: center; color: #c9a876; font-style: italic; margin-bottom: 15px;">
+                        ⚠️ Only 3 matching symbols in a row win! No two-of-a-kind payouts ⚠️
+                    </p>
+                    <div class="paytable">
+                        <div class="pay-line">
+                            <span class="symbols">💎 💎 💎</span>
+                            <span class="payout">JACKPOT! (1000x)</span>
+                        </div>
+                        <div class="pay-line">
+                            <span class="symbols">7️⃣ 7️⃣ 7️⃣</span>
+                            <span class="payout">500x bet</span>
+                        </div>
+                        <div class="pay-line">
+                            <span class="symbols">🔔 🔔 🔔</span>
+                            <span class="payout">100x bet</span>
+                        </div>
+                        <div class="pay-line">
+                            <span class="symbols">⭐ ⭐ ⭐</span>
+                            <span class="payout">50x bet</span>
+                        </div>
+                        <div class="pay-line">
+                            <span class="symbols">🍒 🍒 🍒</span>
+                            <span class="payout">25x bet</span>
+                        </div>
+                        <div class="pay-line">
+                            <span class="symbols">🍊 🍊 🍊</span>
+                            <span class="payout">6x bet</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bonus Section -->
+                <div class="bonus-section">
+                    <div class="bonus-icon">7️⃣</div>
+                    <div class="bonus-info">
+                        <h4>Lucky Sevens</h4>
+                        <p>Requires $2000 blackjack winnings</p>
+                        <div class="bonus-progress">
+                            <div class="progress-bar">
+                                <div id="seven-progress" class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roulette Tab -->
+            <div id="roulette-content" class="tab-panel">
+                <div class="roulette-header">
+                    <h2>🎯 European Roulette</h2>
+                    <p class="roulette-subtitle">Place your bets and spin the wheel of fortune!</p>
+                </div>
+
+                <div class="roulette-main">
+                    <div class="roulette-wheel-container">
+                        <div class="roulette-arrow" id="roulette-arrow">▼</div>
+                        <div class="roulette-wheel" id="roulette-wheel">
+                            <div class="wheel-numbers" id="wheel-numbers">
+                                <!-- Numbers will be generated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="roulette-betting-area">
+                        <div class="betting-controls">
+                            <div class="bet-amount-section">
+                                <label for="roulette-bet">Bet Amount:</label>
+                                <select id="roulette-bet" class="bet-select">
+                                    <option value="10">$10</option>
+                                    <option value="25">$25</option>
+                                    <option value="50" selected>$50</option>
+                                    <option value="100">$100</option>
+                                    <option value="250">$250</option>
+                                    <option value="500">$500</option>
+                                    <option value="1000">$1,000</option>
+                                    <option value="custom">Custom Amount</option>
+                                </select>
+                                <input type="number" id="roulette-custom-bet" class="custom-bet-input"
+                                    placeholder="Enter amount" min="10" style="display: none;">
+                            </div>
+                            <button id="spin-roulette-btn" class="roulette-spin-btn">🎯 SPIN WHEEL 🎯</button>
+                            <button id="clear-bets-btn" class="clear-bets-btn">Clear All Bets</button>
+                        </div>
+
+                        <div class="betting-table">
+                            <div class="numbers-grid">
+                                <!-- Single numbers 0-36 -->
+                                <div class="number-bet zero" data-number="0">0</div>
+                                <div class="numbers-row">
+                                    <div class="number-bet red" data-number="1">1</div>
+                                    <div class="number-bet black" data-number="2">2</div>
+                                    <div class="number-bet red" data-number="3">3</div>
+                                </div>
+                                <div class="numbers-row">
+                                    <div class="number-bet black" data-number="4">4</div>
+                                    <div class="number-bet red" data-number="5">5</div>
+                                    <div class="number-bet black" data-number="6">6</div>
+                                </div>
+                                <div class="numbers-row">
+                                    <div class="number-bet red" data-number="7">7</div>
+                                    <div class="number-bet black" data-number="8">8</div>
+                                    <div class="number-bet red" data-number="9">9</div>
+                                </div>
+                                <div class="numbers-row">
+                                    <div class="number-bet black" data-number="10">10</div>
+                                    <div class="number-bet black" data-number="11">11</div>
+                                    <div class="number-bet red" data-number="12">12</div>
+                                </div>
+                                <div class="numbers-row">
+                                    <div class="number-bet black" data-number="13">13</div>
+                                    <div class="number-bet red" data-number="14">14</div>
+                                    <div class="number-bet black" data-number="15">15</div>
+                                </div>
+                                <div class="numbers-row">
+                                    <div class="number-bet red" data-number="16">16</div>
+                                    <div class="number-bet black" data-number="17">17</div>
+                                    <div class="number-bet red" data-number="18">18</div>
+                                </div>
+                                <div class="numbers-row">
+                                    <div class="number-bet red" data-number="19">19</div>
+                                    <div class="number-bet black" data-number="20">20</div>
+                                    <div class="number-bet red" data-number="21">21</div>
+                                </div>
+                                <div class="numbers-row">
+                                    <div class="number-bet black" data-number="22">22</div>
+                                    <div class="number-bet red" data-number="23">23</div>
+                                    <div class="number-bet black" data-number="24">24</div>
+                                </div>
+                                <div class="numbers-row">
+                                    <div class="number-bet red" data-number="25">25</div>
+                                    <div class="number-bet black" data-number="26">26</div>
+                                    <div class="number-bet red" data-number="27">27</div>
+                                </div>
+                                <div class="numbers-row">
+                                    <div class="number-bet black" data-number="28">28</div>
+                                    <div class="number-bet black" data-number="29">29</div>
+                                    <div class="number-bet red" data-number="30">30</div>
+                                </div>
+                                <div class="numbers-row">
+                                    <div class="number-bet black" data-number="31">31</div>
+                                    <div class="number-bet red" data-number="32">32</div>
+                                    <div class="number-bet black" data-number="33">33</div>
+                                </div>
+                                <div class="numbers-row">
+                                    <div class="number-bet red" data-number="34">34</div>
+                                    <div class="number-bet black" data-number="35">35</div>
+                                    <div class="number-bet red" data-number="36">36</div>
+                                </div>
+                            </div>
+
+                            <div class="outside-bets">
+                                <div class="bet-section">
+                                    <div class="bet-option" data-bet="red">Red</div>
+                                    <div class="bet-option" data-bet="black">Black</div>
+                                </div>
+                                <div class="bet-section">
+                                    <div class="bet-option" data-bet="odd">Odd</div>
+                                    <div class="bet-option" data-bet="even">Even</div>
+                                </div>
+                                <div class="bet-section">
+                                    <div class="bet-option" data-bet="low">1-18</div>
+                                    <div class="bet-option" data-bet="high">19-36</div>
+                                </div>
+                                <div class="bet-section">
+                                    <div class="bet-option" data-bet="dozen1">1st 12</div>
+                                    <div class="bet-option" data-bet="dozen2">2nd 12</div>
+                                    <div class="bet-option" data-bet="dozen3">3rd 12</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="current-bets">
+                            <h3>Current Bets</h3>
+                            <div id="current-bets-list" class="bets-list">
+                                <div class="no-bets">No bets placed</div>
+                            </div>
+                            <div class="total-bet">
+                                Total Bet: $<span id="total-bet-amount">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="roulette-history">
+                        <h3>Recent Results</h3>
+                        <div id="roulette-history-list" class="history-list">
+                            <div class="no-history">No spins yet</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Themes Tab -->
+            <div id="themes-content" class="tab-panel">
+                <!-- Epic Header with Animated Background -->
+                <div class="themes-epic-header">
+                    <div class="themes-background-animation"></div>
+                    <div class="themes-header-content">
+                        <h2 class="themes-title">🎨 CASINO REALMS 🎨</h2>
+                        <p class="themes-subtitle">Choose Your Gambling Dimension</p>
+                        <div class="themes-power-indicator">
+                            <div class="power-orb"></div>
+                            <span class="power-text">THEME ENGINE ACTIVE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theme Control Panel -->
+                <div class="theme-control-panel">
+                    <div class="control-panel-header">
+                        <h3>⚡ THEME CONTROL MATRIX ⚡</h3>
+                    </div>
+                    <div class="control-buttons">
+                        <button id="toggle-themes-btn" onclick="game.toggleThemes()" class="control-btn primary">
+                            <span class="btn-icon">🎨</span>
+                            <span class="btn-text">DISABLE THEMES</span>
+                            <div class="btn-glow"></div>
+                        </button>
+                        <button class="control-btn secondary" onclick="game.randomTheme()">
+                            <span class="btn-icon">🎲</span>
+                            <span class="btn-text">RANDOM REALM</span>
+                            <div class="btn-glow"></div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Casino Realms Grid -->
+                <div class="casino-realms">
+                    <div class="realms-header">
+                        <h3 class="realms-title">🌍 CASINO REALMS 🌍</h3>
+                        <div class="realms-subtitle">Each realm offers a unique gambling experience</div>
+                    </div>
+
+                    <div class="realms-grid">
+                        <!-- Tavern Realm -->
+                        <div class="realm-card active" data-theme="tavern">
+                            <div class="realm-preview tavern-realm">
+                                <div class="realm-atmosphere"></div>
+                                <div class="realm-particles"></div>
+                            </div>
+                            <div class="realm-info">
+                                <div class="realm-icon">🏛️</div>
+                                <h4 class="realm-name">ELITE TAVERN</h4>
+                                <p class="realm-description">Classic warmth meets luxury</p>
+                                <div class="realm-features">
+                                    <span class="feature">🔥 Cozy Atmosphere</span>
+                                    <span class="feature">🍺 Traditional Vibes</span>
+                                </div>
+                                <div class="realm-status active-status">CURRENTLY ACTIVE</div>
+                            </div>
+                            <div class="realm-border-glow"></div>
+                        </div>
+
+                        <!-- Vegas Realm -->
+                        <div class="realm-card locked" data-theme="vegas" data-unlock-level="5">
+                            <div class="realm-preview vegas-realm">
+                                <div class="realm-atmosphere"></div>
+                                <div class="realm-particles"></div>
+                                <div class="neon-signs">
+                                    <div class="neon-sign">VEGAS</div>
+                                </div>
+                            </div>
+                            <div class="realm-info">
+                                <div class="realm-icon">🎰</div>
+                                <h4 class="realm-name">VEGAS NIGHTS</h4>
+                                <p class="realm-description">Neon lights and endless possibilities</p>
+                                <div class="realm-features">
+                                    <span class="feature">✨ Neon Glow</span>
+                                    <span class="feature">🌃 City Lights</span>
+                                </div>
+                                <div class="realm-status locked-status">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP GOLD REQUIRED
+                                </div>
+                            </div>
+                            <div class="realm-border-glow"></div>
+                        </div>
+
+                        <!-- Monte Carlo Realm -->
+                        <div class="realm-card locked" data-theme="monte-carlo" data-unlock-level="10">
+                            <div class="realm-preview monte-realm">
+                                <div class="realm-atmosphere"></div>
+                                <div class="realm-particles"></div>
+                                <div class="elegant-elements">
+                                    <div class="chandelier">💎</div>
+                                </div>
+                            </div>
+                            <div class="realm-info">
+                                <div class="realm-icon">🎩</div>
+                                <h4 class="realm-name">MONTE CARLO</h4>
+                                <p class="realm-description">European sophistication</p>
+                                <div class="realm-features">
+                                    <span class="feature">👑 Royal Elegance</span>
+                                    <span class="feature">💎 Luxury Design</span>
+                                </div>
+                                <div class="realm-status locked-status">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP DIAMOND REQUIRED
+                                </div>
+                            </div>
+                            <div class="realm-border-glow"></div>
+                        </div>
+
+                        <!-- Underground Realm -->
+                        <div class="realm-card locked" data-theme="underground" data-unlock-level="15">
+                            <div class="realm-preview underground-realm">
+                                <div class="realm-atmosphere"></div>
+                                <div class="realm-particles"></div>
+                                <div class="dark-elements">
+                                    <div class="shadow-effect"></div>
+                                </div>
+                            </div>
+                            <div class="realm-info">
+                                <div class="realm-icon">🕳️</div>
+                                <h4 class="realm-name">UNDERGROUND</h4>
+                                <p class="realm-description">Dark secrets and hidden fortunes</p>
+                                <div class="realm-features">
+                                    <span class="feature">🌑 Mystery Vibes</span>
+                                    <span class="feature">⚡ Dangerous Energy</span>
+                                </div>
+                                <div class="realm-status locked-status">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP SAPPHIRE REQUIRED
+                                </div>
+                            </div>
+                            <div class="realm-border-glow"></div>
+                        </div>
+
+                        <!-- Cosmic Realm -->
+                        <div class="realm-card locked" data-theme="cosmic" data-unlock-level="30">
+                            <div class="realm-preview cosmic-realm">
+                                <div class="realm-atmosphere"></div>
+                                <div class="realm-particles"></div>
+                                <div class="cosmic-elements">
+                                    <div class="star-field"></div>
+                                    <div class="nebula"></div>
+                                </div>
+                            </div>
+                            <div class="realm-info">
+                                <div class="realm-icon">🌌</div>
+                                <h4 class="realm-name">COSMIC CASINO</h4>
+                                <p class="realm-description">Gambling among the stars</p>
+                                <div class="realm-features">
+                                    <span class="feature">🌟 Stellar Effects</span>
+                                    <span class="feature">🚀 Space Vibes</span>
+                                </div>
+                                <div class="realm-status locked-status">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP OMNIPOTENT REQUIRED
+                                </div>
+                            </div>
+                            <div class="realm-border-glow"></div>
+                        </div>
+
+                        <!-- Royal Palace Realm -->
+                        <div class="realm-card locked" data-theme="royal" data-unlock-level="25">
+                            <div class="realm-preview royal-realm">
+                                <div class="realm-atmosphere"></div>
+                                <div class="royal-elements">
+                                    <div class="crown-glow"></div>
+                                    <div class="royal-curtains"></div>
+                                    <div class="golden-pillars"></div>
+                                </div>
+                            </div>
+                            <div class="realm-info">
+                                <div class="realm-icon">👑</div>
+                                <h4 class="realm-name">ROYAL PALACE</h4>
+                                <p class="realm-description">Fit for kings and queens</p>
+                                <div class="realm-features">
+                                    <span class="feature">👑 Regal Luxury</span>
+                                    <span class="feature">💎 Crown Jewels</span>
+                                </div>
+                                <div class="realm-status locked-status">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP DIVINE REQUIRED
+                                </div>
+                            </div>
+                            <div class="realm-border-glow"></div>
+                        </div>
+
+                        <!-- Holographic Realm -->
+                        <div class="realm-card locked" data-theme="holographic" data-unlock-level="35">
+                            <div class="realm-preview holographic-realm">
+                                <div class="realm-atmosphere"></div>
+                                <div class="holographic-elements">
+                                    <div class="holo-grid"></div>
+                                    <div class="data-streams"></div>
+                                    <div class="neon-circuits"></div>
+                                </div>
+                            </div>
+                            <div class="realm-info">
+                                <div class="realm-icon">🔮</div>
+                                <h4 class="realm-name">HOLOGRAPHIC NEXUS</h4>
+                                <p class="realm-description">Digital reality casino</p>
+                                <div class="realm-features">
+                                    <span class="feature">🌈 Holo Effects</span>
+                                    <span class="feature">⚡ Cyber Tech</span>
+                                </div>
+                                <div class="realm-status locked-status">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP INFINITE REQUIRED
+                                </div>
+                            </div>
+                            <div class="realm-border-glow"></div>
+                        </div>
+
+                        <!-- Legendary Realm -->
+                        <div class="realm-card locked" data-theme="legendary" data-unlock-level="38">
+                            <div class="realm-preview legendary-realm">
+                                <div class="realm-atmosphere"></div>
+                                <div class="legendary-elements">
+                                    <div class="mythic-aura"></div>
+                                    <div class="ancient-runes"></div>
+                                    <div class="legendary-flames"></div>
+                                </div>
+                            </div>
+                            <div class="realm-info">
+                                <div class="realm-icon">⚔️</div>
+                                <h4 class="realm-name">LEGENDARY HALLS</h4>
+                                <p class="realm-description">Where legends are born</p>
+                                <div class="realm-features">
+                                    <span class="feature">⚔️ Epic Power</span>
+                                    <span class="feature">🔥 Mythic Aura</span>
+                                </div>
+                                <div class="realm-status locked-status">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP ETERNAL REQUIRED
+                                </div>
+                            </div>
+                            <div class="realm-border-glow"></div>
+                        </div>
+
+                        <!-- APEX Realm -->
+                        <div class="realm-card locked" data-theme="apex" data-unlock-level="40">
+                            <div class="realm-preview apex-realm">
+                                <div class="realm-atmosphere"></div>
+                                <div class="apex-elements">
+                                    <div class="apex-energy"></div>
+                                    <div class="reality-distortion"></div>
+                                    <div class="omnipotent-glow"></div>
+                                </div>
+                            </div>
+                            <div class="realm-info">
+                                <div class="realm-icon">🌟</div>
+                                <h4 class="realm-name">APEX DIMENSION</h4>
+                                <p class="realm-description">Beyond mortal comprehension</p>
+                                <div class="realm-features">
+                                    <span class="feature">🌟 Ultimate Power</span>
+                                    <span class="feature">∞ Infinite Potential</span>
+                                </div>
+                                <div class="realm-status locked-status">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP APEX REQUIRED
+                                </div>
+                            </div>
+                            <div class="realm-border-glow"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Designs Section -->
+                <div class="card-designs-section">
+                    <div class="designs-header">
+                        <h3 class="designs-title">🃏 LEGENDARY CARD DESIGNS 🃏</h3>
+                        <div class="designs-subtitle">Unlock exclusive card styles as you progress</div>
+                    </div>
+
+                    <div class="card-designs-grid">
+                        <div class="card-design active" data-cards="classic">
+                            <div class="card-preview-container">
+                                <div class="card-sample classic-design">
+                                    <div class="card-face">A♠</div>
+                                </div>
+                                <div class="card-glow"></div>
+                            </div>
+                            <div class="design-info">
+                                <h4>CLASSIC</h4>
+                                <p>Traditional elegance</p>
+                                <div class="design-status active-design">EQUIPPED</div>
+                            </div>
+                        </div>
+
+                        <div class="card-design locked" data-cards="gold" data-unlock-level="8">
+                            <div class="card-preview-container">
+                                <div class="card-sample gold-design">
+                                    <div class="card-face">K♦</div>
+                                </div>
+                                <div class="card-glow"></div>
+                            </div>
+                            <div class="design-info">
+                                <h4>GOLDEN ROYALE</h4>
+                                <p>Gilded perfection</p>
+                                <div class="design-status locked-design">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP PLATINUM+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-design locked" data-cards="neon" data-unlock-level="12">
+                            <div class="card-preview-container">
+                                <div class="card-sample neon-design">
+                                    <div class="card-face">Q♥</div>
+                                </div>
+                                <div class="card-glow"></div>
+                            </div>
+                            <div class="design-info">
+                                <h4>NEON NIGHTS</h4>
+                                <p>Electric energy</p>
+                                <div class="design-status locked-design">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP RUBY+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-design locked" data-cards="diamond" data-unlock-level="20">
+                            <div class="card-preview-container">
+                                <div class="card-sample diamond-design">
+                                    <div class="card-face">J♣</div>
+                                </div>
+                                <div class="card-glow"></div>
+                            </div>
+                            <div class="design-info">
+                                <h4>DIAMOND ELITE</h4>
+                                <p>Ultimate luxury</p>
+                                <div class="design-status locked-design">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP LEGENDARY+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-design locked" data-cards="royal" data-unlock-level="25">
+                            <div class="card-preview-container">
+                                <div class="card-sample royal-design">
+                                    <div class="card-face">K♠</div>
+                                </div>
+                                <div class="card-glow"></div>
+                            </div>
+                            <div class="design-info">
+                                <h4>ROYAL CROWN</h4>
+                                <p>Fit for royalty</p>
+                                <div class="design-status locked-design">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP DIVINE
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-design locked" data-cards="cosmic" data-unlock-level="30">
+                            <div class="card-preview-container">
+                                <div class="card-sample cosmic-design">
+                                    <div class="card-face">A♦</div>
+                                </div>
+                                <div class="card-glow"></div>
+                            </div>
+                            <div class="design-info">
+                                <h4>COSMIC VOID</h4>
+                                <p>From the stars</p>
+                                <div class="design-status locked-design">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP COSMIC
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-design locked" data-cards="holographic" data-unlock-level="35">
+                            <div class="card-preview-container">
+                                <div class="card-sample holographic-design">
+                                    <div class="card-face">Q♠</div>
+                                </div>
+                                <div class="card-glow"></div>
+                            </div>
+                            <div class="design-info">
+                                <h4>HOLOGRAPHIC</h4>
+                                <p>Future tech</p>
+                                <div class="design-status locked-design">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP INFINITE
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-design locked" data-cards="legendary" data-unlock-level="38">
+                            <div class="card-preview-container">
+                                <div class="card-sample legendary-design">
+                                    <div class="card-face">A♥</div>
+                                </div>
+                                <div class="card-glow"></div>
+                            </div>
+                            <div class="design-info">
+                                <h4>LEGENDARY FIRE</h4>
+                                <p>Mythical power</p>
+                                <div class="design-status locked-design">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP GODLIKE
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-design locked" data-cards="apex" data-unlock-level="40">
+                            <div class="card-preview-container">
+                                <div class="card-sample apex-design">
+                                    <div class="card-face">♠♦♥♣</div>
+                                </div>
+                                <div class="card-glow"></div>
+                            </div>
+                            <div class="design-info">
+                                <h4>APEX ULTIMATE</h4>
+                                <p>Maximum power</p>
+                                <div class="design-status locked-design">
+                                    <span class="lock-icon">🔒</span>
+                                    VIP APEX
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dev Tab -->
+            <div id="dev-content" class="tab-panel">
+                <div class="dev-header">
+                    <h2>⚙️ Development Tools</h2>
+                    <p class="dev-subtitle">"Testing and debugging features for developers"</p>
+                </div>
+
+                <div class="dev-sections">
+                    <!-- Save/Load System -->
+                    <div class="dev-section">
+                        <h3>💾 Save/Load System</h3>
+                        <p class="dev-warning">⚠️ For testing purposes only. Save feature removed from main game due to
+                            exploit potential.</p>
+
+                        <div class="save-load-controls">
+                            <div class="save-section">
+                                <button id="dev-save-btn" class="btn dev-btn">💾 Generate Save Code</button>
+                                <div id="generated-code" class="generated-code"></div>
+                            </div>
+
+                            <div class="load-section">
+                                <input type="text" id="dev-load-code" placeholder="Enter save code..." maxlength="8"
+                                    class="dev-input">
+                                <button id="dev-load-btn" class="btn dev-btn">📁 Load Code</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pre-Generated Test Codes -->
+                    <div class="dev-section">
+                        <h3>🎯 Test Codes</h3>
+                        <p class="dev-description">Pre-generated codes for testing different VIP levels and balances:
+                        </p>
+
+                        <div class="test-codes-grid">
+                            <div class="test-code-item">
+                                <div class="code-info">
+                                    <strong>DIAM9000</strong> - Diamond Level
+                                    <br><span class="code-details">$250,000 • VIP Level 9</span>
+                                </div>
+                                <button
+                                    onclick="document.getElementById('dev-load-code').value='DIAM9000'; game.loadProgress();"
+                                    class="btn code-btn">Load</button>
+                            </div>
+
+                            <div class="test-code-item">
+                                <div class="code-info">
+                                    <strong>RUBY1100</strong> - Ruby Level
+                                    <br><span class="code-details">$500,000 • VIP Level 11</span>
+                                </div>
+                                <button
+                                    onclick="document.getElementById('dev-load-code').value='RUBY1100'; game.loadProgress();"
+                                    class="btn code-btn">Load</button>
+                            </div>
+
+                            <div class="test-code-item">
+                                <div class="code-info">
+                                    <strong>LEGE2000</strong> - Legendary Level
+                                    <br><span class="code-details">$8,000,000 • VIP Level 20</span>
+                                </div>
+                                <button
+                                    onclick="document.getElementById('dev-load-code').value='LEGE2000'; game.loadProgress();"
+                                    class="btn code-btn">Load</button>
+                            </div>
+
+                            <div class="test-code-item">
+                                <div class="code-info">
+                                    <strong>APEX4000</strong> - APEX Level
+                                    <br><span class="code-details">$2.5B • VIP Level 40</span>
+                                </div>
+                                <button
+                                    onclick="document.getElementById('dev-load-code').value='APEX4000'; game.loadProgress();"
+                                    class="btn code-btn">Load</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Game State Controls -->
+                    <div class="dev-section">
+                        <h3>🎮 Game State Controls</h3>
+                        <div class="dev-controls">
+                            <button onclick="game.balance = 1000000; game.updateBalance(); game.updateVIPStatus();"
+                                class="btn dev-btn">💰 Set $1M Balance</button>
+                            <button onclick="game.vipLevel = 40; game.updateVIPStatus(); game.updateThemeDisplay();"
+                                class="btn dev-btn">👑 Max VIP Level</button>
+                            <button
+                                onclick="game.balance = 500; game.vipLevel = 1; game.gamesPlayed = 0; game.totalWagered = 0; game.updateBalance(); game.updateVIPStatus();"
+                                class="btn dev-btn">🔄 Reset Game</button>
+                            <button onclick="localStorage.clear(); location.reload();" class="btn dev-btn danger">🗑️
+                                Clear All Data</button>
+                        </div>
+                    </div>
+
+                    <!-- Debug Information -->
+                    <div class="dev-section">
+                        <h3>🔍 Debug Info</h3>
+                        <div class="debug-info">
+                            <div class="debug-item">
+                                <strong>Current Balance:</strong> $<span id="debug-balance">500</span>
+                            </div>
+                            <div class="debug-item">
+                                <strong>VIP Level:</strong> <span id="debug-vip">1</span>
+                            </div>
+                            <div class="debug-item">
+                                <strong>Games Played:</strong> <span id="debug-games">0</span>
+                            </div>
+                            <div class="debug-item">
+                                <strong>Total Wagered:</strong> $<span id="debug-wagered">0</span>
+                            </div>
+                            <div class="debug-item">
+                                <strong>Current Theme:</strong> <span id="debug-theme">tavern</span>
+                            </div>
+                        </div>
+                        <button onclick="game.updateDebugInfo();" class="btn dev-btn">🔄 Refresh Debug Info</button>
+                    </div>
+
+                    <!-- Slot Odds Manipulation -->
+                    <div class="dev-section">
+                        <h3>🎰 Slot Odds Control</h3>
+                        <p class="dev-description">Manipulate slot machine winning chances in real-time:</p>
+
+                        <div class="odds-controls">
+                            <div class="odds-sliders">
+                                <div class="slider-group">
+                                    <label for="jackpot-odds">💎 Jackpot (<span
+                                            id="jackpot-display">0.5</span>%)</label>
+                                    <input type="range" id="jackpot-odds" min="0" max="5" step="0.1" value="0.5"
+                                        class="odds-slider">
+                                </div>
+
+                                <div class="slider-group">
+                                    <label for="big-win-odds">🔔 Big Win (<span
+                                            id="big-win-display">3.0</span>%)</label>
+                                    <input type="range" id="big-win-odds" min="0" max="10" step="0.1" value="3.0"
+                                        class="odds-slider">
+                                </div>
+
+                                <div class="slider-group">
+                                    <label for="medium-win-odds">⭐ Medium Win (<span
+                                            id="medium-win-display">8.0</span>%)</label>
+                                    <input type="range" id="medium-win-odds" min="0" max="20" step="0.1" value="8.0"
+                                        class="odds-slider">
+                                </div>
+
+                                <div class="slider-group">
+                                    <label for="small-win-odds">🍒 Small Win (<span
+                                            id="small-win-display">25.0</span>%)</label>
+                                    <input type="range" id="small-win-odds" min="0" max="50" step="0.1" value="25.0"
+                                        class="odds-slider">
+                                </div>
+                            </div>
+
+                            <div class="odds-summary">
+                                <div class="summary-item">
+                                    <strong>Total Win Rate:</strong> <span id="win-rate">36.5</span>%
+                                </div>
+                                <div class="summary-item">
+                                    <strong>Loss Rate:</strong> <span id="loss-rate">63.5</span>%
+                                </div>
+                            </div>
+
+                            <div class="preset-buttons">
+                                <button onclick="game.setSlotOdds('rigged')" class="btn preset-btn rigged">🎯 Rigged
+                                    (80%)</button>
+                                <button onclick="game.setSlotOdds('generous')" class="btn preset-btn generous">💰
+                                    Generous (40%)</button>
+                                <button onclick="game.setSlotOdds('normal')" class="btn preset-btn normal">⚖️ Normal
+                                    (20%)</button>
+                                <button onclick="game.setSlotOdds('casino')" class="btn preset-btn casino">🏛️ Casino
+                                    (5%)</button>
+                                <button onclick="game.setSlotOdds('brutal')" class="btn preset-btn brutal">💀 Brutal
+                                    (1%)</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lockdown Overlay -->
+        <div id="lockdown-overlay" class="lockdown-overlay">
+            <div class="lockdown-content">
+                <div class="lockdown-title">ACCOUNT FROZEN</div>
+                <div class="lockdown-message">
+                    You have failed to repay your loan to Vinny's Financial Services.<br><br>
+                    <strong>DEBT COLLECTION PROTOCOL ACTIVATED</strong><br><br>
+                    Your gambling privileges have been permanently suspended.<br>
+                    Our associates will be in touch regarding payment arrangements.<br><br>
+                    <em>"You should have read the fine print, friend."</em><br>
+                    - Vincent "Vinny" Torrino, CEO
+                </div>
+                <div id="lockdown-debt" class="lockdown-debt">OUTSTANDING DEBT: $0</div>
+                <div style="margin-top: 30px; font-size: 0.9em; color: #888;">
+                    This session has been terminated.<br>
+                    Clear your browser data to reset (if you dare).
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+</body>
+
+</html>
